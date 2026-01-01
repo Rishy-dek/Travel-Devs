@@ -26,12 +26,15 @@ int main() {
         printf("Environment State: Mismatch!\\n");
     }
 
-    // 5. Load Resource
-    char* icon_data = (char*)td_load("icon.png");
-    if (icon_data) {
-        printf("Loaded Data: %s\\n", icon_data);
-        td_free_resource(icon_data);
-    }
+    // 5. Load Resources with Caching
+    printf("\nLoading assets with caching:\n");
+    td_load("icon.png");   // Fresh load
+    td_load("icon.png");   // Cache hit
+    td_load("config.json");
+    td_load("vertex.vert");
+    
+    td_clear_cache();
+    td_load("icon.png");   // Fresh load again after clear
 
     printf("\\n--- End of Demo ---\\n");
     return 0;

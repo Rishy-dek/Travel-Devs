@@ -52,6 +52,14 @@ export async function registerRoutes(
     const existing = await storage.getSnippets();
     if (existing.length === 0) {
       await storage.createSnippet({
+        title: "Asset Loading & Caching",
+        code: `// C++ Example
+auto img = td::TravelDevs::load("hero.png"); // Cached
+td::TravelDevs::clear_cache(); // Free memory`,
+        description: "Supports Images (PNG, JPG), JSON, and Shaders with built-in memory caching.",
+        language: "cpp"
+      });
+      await storage.createSnippet({
         title: "Python Usage",
         code: `from traveldevs import TravelDevs
 

@@ -35,6 +35,8 @@ class TravelDevs:
             cls._lib.td_require_state.argtypes = [ctypes.c_char_p]
             cls._lib.td_load.restype = ctypes.c_void_p
             cls._lib.td_load.argtypes = [ctypes.c_char_p]
+            cls._lib.td_clear_cache.restype = None
+            cls._lib.td_clear_cache.argtypes = []
             cls._lib.td_free_resource.argtypes = [ctypes.c_void_p]
 
         return cls._lib
@@ -67,5 +69,9 @@ class TravelDevs:
             return None
         # Simulating data retrieval
         data = ctypes.string_at(res_ptr)
-        lib.td_free_resource(res_ptr)
+        # In caching version, we don't free immediately
         return data.decode('utf-8', errors='ignore')
+
+    @staticmethod
+    def clear_cache():
+        TravelDevs._get_lib().td_clear_cache()

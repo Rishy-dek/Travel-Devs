@@ -15,8 +15,14 @@ def run_demo():
         if TravelDevs.require_state("linux"):
             print("Python Environment: Verified")
             
-        content = TravelDevs.load("script.py")
-        print(f"Python Loaded Content: {content}")
+        print("\nPython Caching Demo:")
+        print(f"Load 1: {TravelDevs.load('logo.png')}")
+        print(f"Load 2 (Cache): {TravelDevs.load('logo.png')}")
+        print(f"Load JSON: {TravelDevs.load('settings.json')}")
+        print(f"Load Shader: {TravelDevs.load('basic.vert')}")
+        
+        TravelDevs.clear_cache()
+        print(f"Load after clear: {TravelDevs.load('logo.png')}")
         
     except Exception as e:
         print(f"Error: {e}")

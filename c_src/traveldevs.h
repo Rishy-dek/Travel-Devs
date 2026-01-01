@@ -30,7 +30,10 @@ int td_require_state(const char* state_signature);
 // Load a resource (simulated). Returns a pointer to data or NULL.
 void* td_load(const char* resource_name);
 
-// Free a loaded resource.
+// Clear the memory cache of loaded resources.
+void td_clear_cache(void);
+
+// Free a loaded resource (if not cached).
 void td_free_resource(void* res);
 
 #ifdef __cplusplus

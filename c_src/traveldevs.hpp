@@ -36,8 +36,12 @@ public:
         
         // Prototype simplification: assume 1024 bytes for demo
         std::vector<char> data((char*)res, (char*)res + 1024);
-        td_free_resource(res);
+        // In caching version, we don't call free here
         return data;
+    }
+
+    static void clear_cache() {
+        td_clear_cache();
     }
 };
 
