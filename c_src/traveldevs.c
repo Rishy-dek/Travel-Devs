@@ -16,19 +16,41 @@ int td_init(void) {
 const char* td_path(td_path_type_t type) {
     if (!initialized) return NULL;
     
+    // Cross-platform path resolution
+#ifdef _WIN32
+    const char* sep = "\\";
+#else
+    const char* sep = "/";
+#endif
+
     // Simple prototype implementation: use environment variables or defaults
     switch (type) {
         case TD_ASSETS:
             {
                 char* env = getenv("TD_ASSETS_PATH");
-                return env ? env : "./assets";
+                if (env) return env;
+                static char path_buf[256];
+                snprintf(path_buf, sizeof(path_buf), ".%sassets", sep);
+                return path_buf;
             }
         case TD_CONFIG:
-            return "./config";
+            {
+                static char path_buf[256];
+                snprintf(path_buf, sizeof(path_buf), ".%sconfig", sep);
+                return path_buf;
+            }
         case TD_CACHE:
+#ifdef _WIN32
+            return "C:\\Temp\\td_cache";
+#else
             return "/tmp/td_cache";
+#endif
         case TD_LOGS:
+#ifdef _WIN32
+            return "C:\\Logs\\td";
+#else
             return "/var/log/td";
+#endif
         default:
             return ".";
     }

@@ -52,6 +52,16 @@ export async function registerRoutes(
     const existing = await storage.getSnippets();
     if (existing.length === 0) {
       await storage.createSnippet({
+        title: "Cross-Platform Build",
+        code: `// Windows:
+// > mingw32-make
+
+// macOS / Linux:
+// $ make`,
+        description: "The build system automatically detects your OS and applies correct compiler flags.",
+        language: "bash"
+      });
+      await storage.createSnippet({
         title: "Initialize Library",
         code: `if (td_init() != 0) {
     fprintf(stderr, "Failed to initialize Travel-devs\\n");
