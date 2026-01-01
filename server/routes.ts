@@ -52,6 +52,25 @@ export async function registerRoutes(
     const existing = await storage.getSnippets();
     if (existing.length === 0) {
       await storage.createSnippet({
+        title: "Python Usage",
+        code: `from traveldevs import TravelDevs
+
+TravelDevs.init()
+path = TravelDevs.path(0) # TD_ASSETS
+config = TravelDevs.config("API_KEY")`,
+        description: "Python binding using ctypes for seamless integration.",
+        language: "python"
+      });
+      await storage.createSnippet({
+        title: "C++ Usage",
+        code: `#include "traveldevs.hpp"
+
+td::TravelDevs::init();
+std::string path = td::TravelDevs::path(TD_ASSETS);`,
+        description: "Header-only C++ wrapper with std::string support.",
+        language: "cpp"
+      });
+      await storage.createSnippet({
         title: "Cross-Platform Build",
         code: `// Windows:
 // > mingw32-make
