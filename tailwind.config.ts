@@ -83,9 +83,9 @@ export default {
         },
       },
       fontFamily: {
-        sans: ["var(--font-sans)"],
-        serif: ["var(--font-serif)"],
-        mono: ["var(--font-mono)"],
+        sans: ["'DM Sans'", "sans-serif"],
+        mono: ["'Fira Code'", "monospace"],
+        display: ["'Architects Daughter'", "cursive"],
       },
       keyframes: {
         "accordion-down": {
